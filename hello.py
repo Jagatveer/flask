@@ -1,9 +1,12 @@
 from flask import Flask
-application = Flask(__name__)
+from werkzeug.contrib.fixers import ProxyFix
+app = Flask(__name__)
 
-@application.route("/")
+@app.route("/")
 def hello():
-    return "<h1 style='color:blue'>Jagatveer Welcomes you!!</h1>"
+    return "<h1 style='color:red'>Look Rad, No hands!! (because a simple hello world is too mainstream!)</h1>"
+
+app.wsgi_app = ProxyFix(app.wsgi_app)
 
 if __name__ == "__main__":
-    application.run(host='0.0.0.0')
+    app.run()
